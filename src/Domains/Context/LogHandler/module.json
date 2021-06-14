@@ -1,0 +1,14 @@
+{
+    "name": "LogHandler",
+    "alias": "LogHandler",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Domains\Context\\LogHandler\\Infrastructure\\Framework\\Providers\\LogHandlerServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

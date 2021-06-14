@@ -1,0 +1,6 @@
+/.idea
+.DS_Store
+src/.DS_Store
+src/deployment/orchestration/dump.sql
+/composer.phar
+/.vscode

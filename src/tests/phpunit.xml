@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="true" testdox="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">../Domains/Context/LogHandler</directory>
+            <directory suffix=".php">Context/PlayersInformation</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">Context/LogHandler/Infrastructure</directory>
+            <directory suffix=".php">Context/LogHandler/Inbound</directory>
+            <directory suffix=".php">Context/LogHandler/Outbound</directory>
+            <directory suffix=".php">Context/PlayersInformation/Infrastructure</directory>
+            <directory suffix=".php">Context/PlayersInformation/Inbound</directory>
+            <directory suffix=".php">Context/PlayersInformation/Outbound</directory>
+            <directory prefix="Reporting">Context/PlayersInformation/Application/UseCases</directory>
+            <directory suffix=".php">Context/PlayersInformation/Application/EventHandlers</directory>
+            <directory suffix=".php">Context/PlayersInformation/Application/Services/DataSource/Reporting</directory>
+            <directory suffix="NotFound.php">Context/PlayersInformation/*</directory>                                                                                                                                                                                       
+        </exclude>
+    </coverage>
+    <testsuites>
+        <testsuite name="LogHandler">
+            <directory suffix="Test.php">./Context/LogHandler</directory>
+        </testsuite>
+        <testsuite name="PlayersInformation">
+            <directory suffix="Test.php">./Context/PlayersInformation</directory>
+        </testsuite>
+        <testsuite name="Quake3ArenaLogging">
+            <directory suffix="Test.php">./Context/Quake3ArenaLogging</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
