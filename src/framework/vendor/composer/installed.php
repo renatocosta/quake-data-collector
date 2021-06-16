@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '8fdd35051b1bc8519eee6a15b157b7e25f1613f1',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -341,12 +341,12 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '8fdd35051b1bc8519eee6a15b157b7e25f1613f1',
             'dev_requirement' => false,
         ),
         'league/commonmark' => array(
@@ -438,6 +438,15 @@
             'aliases' => array(),
             'reference' => '41b7e9999133d5082700d31a1d0977161df8322a',
             'dev_requirement' => true,
+        ),
+        'nwidart/laravel-modules' => array(
+            'pretty_version' => '5.1.0',
+            'version' => '5.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nwidart/laravel-modules',
+            'aliases' => array(),
+            'reference' => 'd4edc3465d471644ca44b1b303803492609957cd',
+            'dev_requirement' => false,
         ),
         'opis/closure' => array(
             'pretty_version' => '3.6.2',

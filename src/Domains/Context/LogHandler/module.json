@@ -6,7 +6,7 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Domains\Context\\LogHandler\\Infrastructure\\Framework\\Providers\\LogHandlerServiceProvider"
+        "Domains\\Context\\LogHandler\\Infrastructure\\Framework\\Providers\\LogHandlerServiceProvider"
     ],
     "aliases": {},
     "files": [],

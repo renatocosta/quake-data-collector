@@ -2,6 +2,8 @@
 
 namespace Domains\CrossCutting\Domain\Application\Event;
 
+use Illuminate\Support\Facades\Log;
+
 abstract class AbstractEvent implements EventInterface
 {
 
@@ -19,6 +21,7 @@ abstract class AbstractEvent implements EventInterface
     {
         $this->setEventName();
         $this->createdAt = new \DateTimeImmutable();
+        $this->showEventDetails();
     }
 
     private function setEventName(): void
@@ -37,4 +40,8 @@ abstract class AbstractEvent implements EventInterface
         return $this->createdAt;
     }
 
+    public function showEventDetails(): void
+    {
+        Log::info(sprintf('Domain event %s runned at %s', $this->getEventName(), $this->createdAt()->format('Y-m-d H:i:s.u')));
+    }
 }

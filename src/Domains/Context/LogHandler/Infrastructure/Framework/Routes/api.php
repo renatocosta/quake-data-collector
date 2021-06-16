@@ -12,8 +12,3 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => ['auth:api', 'api'], 'prefix' => 'LogHandler'], function () {
-
-Route::post('/spreadsheet', 'SpreadsheetController@extract');
-
-});

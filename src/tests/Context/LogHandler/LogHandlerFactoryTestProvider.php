@@ -2,33 +2,28 @@
 
 namespace Tests\Context\LogHandler;
 
+use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileUseCase;
 use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
-use Domains\Context\LogHandler\Application\Services\Spreadsheet\SpreadsheetExtractor;
-use Domains\Context\LogHandler\Application\UseCases\Spreadsheet\ExtractSpreadsheetUseCase;
-use Domains\Context\LogHandler\Domain\Model\SpreadsheetSource\SpreadsheetSource;
+use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileEntity;
+use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
 
 trait LogHandlerFactoryTestProvider
 {
 
     protected $messageHandler;
 
-    protected $spreadsheetSource;
+    protected $logFile;
 
-    protected $spreadsheetExtractor;
+    protected $selectLogFileUseCase;
 
-    protected $extractSpreadsheetOutputPort;
-
-    protected $extractSpreadsheetUseCase;
-
-    protected $remoteFileId = 10911;
+    protected DomainEventBus $domainEventBus;
 
     public function loadDependencies()
     {
-        $this->createMessageHandler();
-        $this->createSpreadsheet();
-        $this->createSpreadsheetExtractor();
-        $this->createExtractSpreadsheetOutputPort();
-        $this->createExtractSpreadsheetUseCase();
+       /* $this->createMessageHandler();
+        $this->logFile();
+        $this->selectLogFileUseCase();*/
+        $this->createDomainEventBus();
     }
 
     protected function createMessageHandler()
@@ -36,23 +31,19 @@ trait LogHandlerFactoryTestProvider
         $this->messageHandler = new MessageHandler();
     }
 
-    protected function createSpreadsheet()
+    protected function logFile()
     {
-        $this->spreadsheetSource = new SpreadsheetSource();
+        $this->createDomainEventBus();
+        $this->logFile = new LogFileEntity($this->domainEventBus);
     }
 
-    protected function createSpreadsheetExtractor()
+    protected function selectLogFileUseCase()
     {
-        $this->spreadsheetExtractor = new SpreadsheetExtractor();
+        $this->selectLogFileUseCase = new SelectLogFileUseCase($this->logFile);
     }
 
-    protected function createExtractSpreadsheetOutputPort()
+    protected function createDomainEventBus()
     {
-        $this->extractSpreadsheetOutputPort = new ExtractSpreadsheetOutputPortMocked();
-    }
-
-    protected function createExtractSpreadsheetUseCase()
-    {
-        $this->extractSpreadsheetUseCase = new ExtractSpreadsheetUseCase($this->spreadsheetSource, $this->spreadsheetExtractor, $this->extractSpreadsheetOutputPort);
+        $this->domainEventBus = new DomainEventBus();
     }
 }

@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'namespace' => 'Modules',
+    'namespace' => 'Domains',
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
         |
         */
 
-        'modules' => base_path('Modules'),
+        'modules' => base_path('../Domains/Context'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path

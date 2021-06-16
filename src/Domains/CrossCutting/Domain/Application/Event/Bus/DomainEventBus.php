@@ -36,7 +36,6 @@ final class DomainEventBus
 
             if ($eventHandler->isSubscribedTo($aDomainEvent)) {
                 $eventHandler->handle($aDomainEvent);
-                break;
             }
 
         }

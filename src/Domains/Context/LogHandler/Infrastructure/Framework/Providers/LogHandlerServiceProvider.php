@@ -4,11 +4,6 @@ namespace Domains\Context\LogHandler\Infrastructure\Framework\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Domains\Context\LogHandler\Application\Services\Spreadsheet\SpreadsheetExtractor;
-use Domains\Context\LogHandler\Application\UseCases\Spreadsheet\ExtractSpreadsheetUseCase;
-use Domains\Context\LogHandler\Application\UseCases\Spreadsheet\IExtractSpreadsheetUseCase;
-use Domains\Context\LogHandler\Domain\Model\SpreadsheetSource\SpreadsheetSource;
-use Domains\Context\LogHandler\Outbound\ExtractSpreadsheetOutputPort;
 
 class LogHandlerServiceProvider extends ServiceProvider
 {
@@ -34,17 +29,6 @@ class LogHandlerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
-        ## USE CASE - Importing a spreadsheet   ##
-        $this->app->singleton(
-            IExtractSpreadsheetUseCase::class,
-            function () {
-                $outputPort = new ExtractSpreadsheetOutputPort();
-                $dataSource = new SpreadsheetSource();
-                $spreadsheetExtractor = new SpreadsheetExtractor();
-                return new ExtractSpreadsheetUseCase($dataSource, $spreadsheetExtractor, $outputPort);
-            }
-        );
 
     }
 
