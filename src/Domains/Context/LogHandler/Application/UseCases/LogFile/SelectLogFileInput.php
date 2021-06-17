@@ -3,7 +3,6 @@
 namespace Domains\Context\LogHandler\Application\UseCases\LogFile;
 
 use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
-use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileInfo;
 
 final class SelectLogFileInput
 {

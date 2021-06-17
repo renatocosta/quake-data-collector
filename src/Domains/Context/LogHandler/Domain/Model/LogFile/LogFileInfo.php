@@ -15,8 +15,6 @@ class LogFileInfo
 
     const MISSING_FILE_EXTENSION_MESSAGE = 'Missing file extension %s';
 
-    const NO_CONTENT_FILE_MESSAGE = "No content file";
-
     const MIN_SIZE_REQUIRED = 1;
 
     const MIN_SIZE_REQUIRED_MESSAGE = 'Min %s size required';

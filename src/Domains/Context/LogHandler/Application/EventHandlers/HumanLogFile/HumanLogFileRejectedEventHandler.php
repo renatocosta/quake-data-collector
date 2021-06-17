@@ -2,13 +2,13 @@
 
 namespace Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile;
 
-use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFileCreated;
+use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFileRejected;
 use Domains\CrossCutting\Domain\Application\Event\AbstractEvent;
 use Domains\CrossCutting\Domain\Application\Event\DomainEventHandler;
 use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
 use Illuminate\Support\Facades\Log;
 
-final class HumanLogFileCreatedForPlayersKilledEventHandler implements DomainEventHandler
+final class HumanLogFileRejectedEventHandler implements DomainEventHandler
 {
 
     private MessageHandler $messageHandler;
@@ -21,11 +21,12 @@ final class HumanLogFileCreatedForPlayersKilledEventHandler implements DomainEve
     public function handle(AbstractEvent $domainEvent): void
     {
         Log::info(__CLASS__);
-        dd($domainEvent->humanLogFile->getTotalKills());
+        $wholeLogErrors = [$domainEvent->humanLogFile->getErrors(), $domainEvent->humanLogFile->getRows()];
+        dd($wholeLogErrors);
     }
 
     public function isSubscribedTo(AbstractEvent $domainEvent): bool
     {
-        return $domainEvent instanceof HumanLogFileCreated;
+        return $domainEvent instanceof HumanLogFileRejected;
     }
 }

@@ -30,10 +30,11 @@ final class LogFileEntity extends AggregateRoot implements LogFile
         $this->metaData = $metaData;
 
         try {
-            Assert::that($file, LogFileInfo::NO_CONTENT_FILE_MESSAGE)->notBlank();
+            $this->metaData->validation();
             $this->raise(new LogFileSelected($this));
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();
+            $this->raise(new LogFileRejected($this));
         }
     }
 
@@ -57,5 +58,10 @@ final class LogFileEntity extends AggregateRoot implements LogFile
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function __toString(): string
+    {
+       return sprintf('File %s Metadata %s', json_encode($this->file), json_encode($this->metaData));
     }
 }

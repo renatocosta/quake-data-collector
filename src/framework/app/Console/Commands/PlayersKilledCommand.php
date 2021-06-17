@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler;
+use Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileRejectedEventHandler;
 use Domains\Context\LogHandler\Application\UseCases\Factories\QuakeDataCollector;
 use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
 use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
@@ -43,6 +44,7 @@ class PlayersKilledCommand extends Command
     {
         $playersKilledCollector = new QuakeDataCollector(new DomainEventBus());
         $playersKilledCollector->attachEventHandlerToHumanLogFile(new HumanLogFileCreatedForPlayersKilledEventHandler(new MessageHandler()));
+        $playersKilledCollector->attachEventHandlerToHumanLogFile(new HumanLogFileRejectedEventHandler(new MessageHandler()));
         $playersKilledCollector->dispatch();
     }
 }

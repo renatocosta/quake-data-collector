@@ -12,7 +12,6 @@ class LogFileTest extends TestCase
 {
 
     use \Tests\Context\LogHandler\LogHandlerFactoryTestProvider;
-    use \Tests\Context\LogHandler\LogHandlerTestProvider;
 
     public static function setUpBeforeClass(): void
     {

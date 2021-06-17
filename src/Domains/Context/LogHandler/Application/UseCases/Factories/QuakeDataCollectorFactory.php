@@ -8,6 +8,7 @@ use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
 use Domains\Context\LogHandler\Domain\Model\LogFile\LogFile;
 use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileEntity;
 use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler;
+use Domains\Context\LogHandler\Application\Services\HumanRowMapper;
 use Domains\Context\LogHandler\Application\UseCases\HumanLogFile\CreateHumanLogFileUseCase;
 use Domains\Context\LogHandler\Application\UseCases\HumanLogFile\ICreateHumanLogFileUseCase;
 use Domains\Context\LogHandler\Application\UseCases\LogFile\ISelectLogFileUseCase;
@@ -50,18 +51,13 @@ abstract class QuakeDataCollectorFactory
 
     protected function addHumanLogFileUseCase(): void
     {
-        $this->createHumanLogFileUseCase = new CreateHumanLogFileUseCase($this->humanLogFile);
+        $this->createHumanLogFileUseCase = new CreateHumanLogFileUseCase($this->humanLogFile, new HumanRowMapper());
     }
 
     protected function addLogFile(): void
     {
         $this->domainEventBus->subscribe(new LogFileSelectedEventHandler($this->createHumanLogFileUseCase, new MessageHandler()));
         $this->logFile = new LogFileEntity($this->domainEventBus);
-    }
-
-    protected function getLogFile(): LogFile
-    {
-        return $this->logFile;
     }
 
     protected function addLogFileUseCase(): void
