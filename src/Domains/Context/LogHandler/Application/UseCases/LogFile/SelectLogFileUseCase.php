@@ -22,24 +22,12 @@ final class SelectLogFileUseCase implements ISelectLogFileUseCase
     {
 
         try {
-
             $file = new \SplFileObject(storage_path('app/public/') . $input->fileName);
             $file->setFlags(\SplFileObject::SKIP_EMPTY);
+            $this->logFile->extractOf($file, new LogFileMetadata($file->getSize(), $file->getExtension()));
         } catch (\Exception $e) {
-            $input->modelState->addKeyError(
-                LogFileInfo::UNABLE_TO_HANDLE_THIS_FILE_MESSAGE
-            );
             Log::error($e->getMessage());
             throw new SelectLogFileException(LogFileInfo::UNABLE_TO_HANDLE_THIS_FILE_MESSAGE);
-        }
-
-        $this->logFile->extractOf($file, new LogFileMetadata($file->getSize(), $file->getExtension()));
-
-        if (!$this->logFile->isValid()) {
-            $input->modelState->addListError(
-                $this->logFile->getErrors()
-            );
-            Log::error("Errors " . json_encode($this->logFile->getErrors()));
         }
     }
 }

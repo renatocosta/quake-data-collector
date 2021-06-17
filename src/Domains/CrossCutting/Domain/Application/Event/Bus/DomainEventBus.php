@@ -30,10 +30,8 @@ final class DomainEventBus
 
     public function publish(AbstractEvent $aDomainEvent): void
     {
-
         for ($this->eventHandlers->rewind(); $this->eventHandlers->valid(); $this->eventHandlers->next()) {
             $eventHandler = $this->eventHandlers->current();
-
             if ($eventHandler->isSubscribedTo($aDomainEvent)) {
                 $eventHandler->handle($aDomainEvent);
             }

@@ -2,7 +2,6 @@
 
 namespace Domains\Context\LogHandler\Application\UseCases\HumanLogFile;
 
-use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
 use Generator;
 
 final class CreateHumanLogFileInput
@@ -12,11 +11,8 @@ final class CreateHumanLogFileInput
 
     public array $metadata;
 
-    public MessageHandler $modelState;
-
-    public function __construct(Generator $content, array $metadata = [], MessageHandler $messageHandler)
+    public function __construct(Generator $content, array $metadata = [])
     {
-        $this->modelState = $messageHandler;
         $this->content = $content;
         $this->metadata = $metadata;
     }

@@ -9,11 +9,8 @@ final class SelectLogFileInput
 
     public string $fileName;
 
-    public MessageHandler $modelState;
-
-    public function __construct(MessageHandler $messageHandler, string $fileName)
+    public function __construct(string $fileName)
     {
-        $this->modelState = $messageHandler;
         $this->fileName = $fileName;
     }
 }

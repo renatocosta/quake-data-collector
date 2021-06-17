@@ -7,7 +7,6 @@ use Domains\Context\LogHandler\Application\UseCases\HumanLogFile\ICreateHumanLog
 use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileSelected;
 use Domains\CrossCutting\Domain\Application\Event\AbstractEvent;
 use Domains\CrossCutting\Domain\Application\Event\DomainEventHandler;
-use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
 use Illuminate\Support\Facades\Log;
 
 final class LogFileSelectedEventHandler implements DomainEventHandler
@@ -15,19 +14,17 @@ final class LogFileSelectedEventHandler implements DomainEventHandler
 
     private ICreateHumanLogFileUseCase $createHumanLogFileUseCase;
 
-    private MessageHandler $messageHandler;
-
-    public function __construct(ICreateHumanLogFileUseCase $createHumanLogFileUseCase, MessageHandler $messageHandler)
+    public function __construct(ICreateHumanLogFileUseCase $createHumanLogFileUseCase)
     {
         $this->createHumanLogFileUseCase = $createHumanLogFileUseCase;
-        $this->messageHandler = $messageHandler;
     }
 
     public function handle(AbstractEvent $domainEvent): void
     {
+        Log::info(__CLASS__);
         $logFile = $domainEvent->logFile;
         $metadata = $logFile->getMetadata();
-        $inputCase = new CreateHumanLogFileInput($logFile->getContent(), ['size' => $metadata->size, 'extension' => $metadata->extension], $this->messageHandler);
+        $inputCase = new CreateHumanLogFileInput($logFile->getContent(), ['size' => $metadata->size, 'extension' => $metadata->extension]);
         $this->createHumanLogFileUseCase->execute($inputCase);
     }
 

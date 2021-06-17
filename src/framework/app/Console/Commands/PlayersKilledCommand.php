@@ -4,9 +4,10 @@ namespace App\Console\Commands;
 
 use Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler;
 use Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileRejectedEventHandler;
+use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileRejectedEventHandler;
+use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler;
 use Domains\Context\LogHandler\Application\UseCases\Factories\QuakeDataCollector;
 use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
-use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
 use Illuminate\Console\Command;
 
 class PlayersKilledCommand extends Command
@@ -43,8 +44,10 @@ class PlayersKilledCommand extends Command
     public function handle()
     {
         $playersKilledCollector = new QuakeDataCollector(new DomainEventBus());
-        $playersKilledCollector->attachEventHandlerToHumanLogFile(new HumanLogFileCreatedForPlayersKilledEventHandler(new MessageHandler()));
-        $playersKilledCollector->attachEventHandlerToHumanLogFile(new HumanLogFileRejectedEventHandler(new MessageHandler()));
+        $playersKilledCollector->attachEventHandler(new LogFileSelectedEventHandler($playersKilledCollector->getCreateHumanLogFileUseCase()));
+        $playersKilledCollector->attachEventHandler(new LogFileRejectedEventHandler());
+        $playersKilledCollector->attachEventHandler(new HumanLogFileCreatedForPlayersKilledEventHandler());
+        $playersKilledCollector->attachEventHandler(new HumanLogFileRejectedEventHandler());
         $playersKilledCollector->dispatch();
     }
 }
