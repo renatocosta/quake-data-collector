@@ -1,15 +1,14 @@
 <?php
 
-namespace Domains\Context\LogHandler\Domain\Model\HumanLogFile;
+namespace Domains\Context\MatchReporting\Domain\Model\PlayersKilled;
 
 use Domains\CrossCutting\Domain\Model\Common\Validatable;
 
-interface HumanLogFileRowable extends Validatable
+interface Matchable extends Validatable
 {
 
     public function getPlayerWhoKilled(): string;
 
     public function getPlayerWhoDied(): string;
 
-    public function getMeanOfDeath(): string;
 }

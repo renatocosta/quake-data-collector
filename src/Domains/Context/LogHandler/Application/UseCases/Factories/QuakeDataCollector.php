@@ -11,8 +11,10 @@ final class QuakeDataCollector extends QuakeDataCollectorFactory
     {
         $this->addLogFile();
         $this->addHumanLogFile();
+        $this->addPlayersKilled();
         $this->addHumanLogFileUseCase();
         $this->addLogFileUseCase();
+        $this->addPlayersKilledUseCase();
     }
 
     public function dispatch(): void

@@ -7,6 +7,8 @@ use Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFi
 use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileRejectedEventHandler;
 use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler;
 use Domains\Context\LogHandler\Application\UseCases\Factories\QuakeDataCollector;
+use Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler;
+use Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledFailedEventHandler;
 use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
 use Illuminate\Console\Command;
 
@@ -46,8 +48,22 @@ class PlayersKilledCommand extends Command
         $playersKilledCollector = new QuakeDataCollector(new DomainEventBus());
         $playersKilledCollector->attachEventHandler(new LogFileSelectedEventHandler($playersKilledCollector->getCreateHumanLogFileUseCase()));
         $playersKilledCollector->attachEventHandler(new LogFileRejectedEventHandler());
-        $playersKilledCollector->attachEventHandler(new HumanLogFileCreatedForPlayersKilledEventHandler());
+        $playersKilledCollector->attachEventHandler(new HumanLogFileCreatedForPlayersKilledEventHandler($playersKilledCollector->getFindPlayersKilledUseCase()));
         $playersKilledCollector->attachEventHandler(new HumanLogFileRejectedEventHandler());
+        $playersKilledCollector->attachEventHandler(new PlayersKilledEventHandler());
+        $playersKilledCollector->attachEventHandler(new PlayersKilledFailedEventHandler());
         $playersKilledCollector->dispatch();
+
+        //Sending to Stdout
+        $players = $playersKilledCollector->getPlayersKilled();
+        $output = json_encode([
+            'game_1' => [
+                'total_kills' => $players->getTotalKills(),
+                'players' => array_keys($players->getPlayers()),
+                'kills' => $players->getPlayers()
+            ]
+        ], JSON_PRETTY_PRINT);
+
+        $this->output->writeln($output);
     }
 }

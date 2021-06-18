@@ -14,19 +14,27 @@ use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileUseCase
 use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFile;
 use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFileEntity;
 use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileInfo;
+use Domains\Context\MatchReporting\Application\UseCases\PlayersKilled\FindPlayersKilledUseCase;
+use Domains\Context\MatchReporting\Application\UseCases\PlayersKilled\IFindPlayersKilledUseCase;
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\PlayersKilled;
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\PlayersKilledEntity;
 
 abstract class QuakeDataCollectorFactory
 {
 
     protected DomainEventBus $domainEventBus;
 
+    protected LogFile $logFile;
+
+    protected ISelectLogFileUseCase $selectLogFileUseCase;
+
     protected HumanLogFile $humanLogFile;
 
     protected ICreateHumanLogFileUseCase $createHumanLogFileUseCase;
 
-    protected LogFile $logFile;
+    protected PlayersKilled $playersKilled;
 
-    protected ISelectLogFileUseCase $selectLogFileUseCase;
+    protected IFindPlayersKilledUseCase $findPlayersKilledUseCase;
 
     protected string $fileName;
 
@@ -65,6 +73,26 @@ abstract class QuakeDataCollectorFactory
     protected function addLogFileUseCase(): void
     {
         $this->selectLogFileUseCase = new SelectLogFileUseCase($this->logFile);
+    }
+
+    protected function addPlayersKilled(): void
+    {
+        $this->playersKilled = new PlayersKilledEntity($this->domainEventBus);
+    }
+
+    public function getPlayersKilled(): PlayersKilled
+    {
+        return $this->playersKilled;
+    }
+
+    protected function addPlayersKilledUseCase(): void
+    {
+        $this->findPlayersKilledUseCase = new FindPlayersKilledUseCase($this->playersKilled);
+    }
+
+    public function getFindPlayersKilledUseCase(): IFindPlayersKilledUseCase
+    {
+        return $this->findPlayersKilledUseCase;
     }
 
     protected abstract function build(): void;

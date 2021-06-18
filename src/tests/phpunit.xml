@@ -22,8 +22,8 @@
         <testsuite name="LogHandler">
             <directory suffix="Test.php">./Context/LogHandler</directory>
         </testsuite>
-        <testsuite name="PlayersInformation">
-            <directory suffix="Test.php">./Context/PlayersInformation</directory>
+        <testsuite name="MatchReporting">
+            <directory suffix="Test.php">./Context/MatchReporting</directory>
         </testsuite>
         <testsuite name="Quake3ArenaLogging">
             <directory suffix="Test.php">./Context/Quake3ArenaLogging</directory>

@@ -1,12 +1,11 @@
 <?php
 
-namespace Domains\Context\LogHandler\Domain\Model\HumanLogFile;
+namespace Domains\Context\MatchReporting\Domain\Model\PlayersKilled;
 
 use Assert\Assert;
 use Assert\AssertionFailedException;
-use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFileInfo;
 
-final class HumanLogFileRow implements HumanLogFileRowable
+final class Matcher implements Matchable
 {
 
     private array $errors = [];
@@ -15,19 +14,15 @@ final class HumanLogFileRow implements HumanLogFileRowable
 
     private string $whoDied;
 
-    private string $means;
-
-    public function __construct(string $whoKilled, string $whoDied, string $means)
+    public function __construct(string $whoKilled, string $whoDied)
     {
 
         $this->whoKilled = $whoKilled;
         $this->whoDied = $whoDied;
-        $this->means = $means;
 
         try {
-            Assert::lazy()->that($this->whoKilled, HumanLogFileInfo::WHO_KILLED_COLUMN)->notBlank()
-                ->that($this->whoDied, HumanLogFileInfo::WHO_DIED_COLUMN)->notBlank()
-                ->that($this->means, HumanLogFileInfo::MEANS_COLUMN)->notBlank()
+            Assert::lazy()->that($this->whoKilled, PlayerInfo::WHO_KILLED_COLUMN)->notBlank()
+                ->that($this->whoDied, PlayerInfo::WHO_DIED_COLUMN)->notBlank()
                 ->verifyNow();
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();
@@ -44,11 +39,6 @@ final class HumanLogFileRow implements HumanLogFileRowable
         return $this->whoDied;
     }
 
-    public function getMeanOfDeath(): string
-    {
-        return $this->means;
-    }
-
     public function isValid(): bool
     {
         return count($this->errors) === 0;
@@ -61,6 +51,6 @@ final class HumanLogFileRow implements HumanLogFileRowable
 
     public function __toString(): string
     {
-        return sprintf('Who killed %s Who died %s means %s', $this->whoKilled, $this->whoDied, $this->means);
+        return sprintf('Who killed %s Who died %s', $this->whoKilled, $this->whoDied);
     }
 }
