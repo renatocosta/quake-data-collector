@@ -46,11 +46,25 @@ class DeathCausesCommand extends Command
      */
     public function handle()
     {
-        $playersKilledCollector = new QuakeDataCollector(new DomainEventBus());
-        $playersKilledCollector->attachEventHandler(new LogFileSelectedEventHandler($playersKilledCollector->getCreateHumanLogFileUseCase(), new MessageHandler()));
-        $playersKilledCollector->attachEventHandler(new LogFileRejectedEventHandler());
-        $playersKilledCollector->attachEventHandler(new HumanLogFileCreatedForDeathCausesEventHandler());
-        $playersKilledCollector->attachEventHandler(new HumanLogFileRejectedEventHandler());
-        $playersKilledCollector->dispatch();
+        $deathCausesCollector = new QuakeDataCollector(new DomainEventBus());
+        $deathCausesCollector->attachEventHandler(new LogFileSelectedEventHandler($playersKilledCollector->getCreateHumanLogFileUseCase()));
+        $deathCausesCollector->attachEventHandler(new LogFileRejectedEventHandler());
+        $deathCausesCollector->attachEventHandler(new HumanLogFileCreatedForDeathCausesEventHandler());
+        $deathCausesCollector->attachEventHandler(new HumanLogFileRejectedEventHandler());
+        //$deathCausesCollector->attachEventHandler(new PlayersKilledEventHandler());
+        //$deathCausesCollector->attachEventHandler(new PlayersKilledFailedEventHandler());
+        $deathCausesCollector->dispatch();
+
+        //Sending to Stdout
+        /*$players = $deathCausesCollector->getPlayersKilled();
+        $output = json_encode([
+            'game_1' => [
+                'total_kills' => $players->getTotalKills(),
+                'players' => array_keys($players->getPlayers()),
+                'kills' => $players->getPlayers()
+            ]
+        ], JSON_PRETTY_PRINT);
+
+        $this->output->writeln($output);*/
     }
 }
