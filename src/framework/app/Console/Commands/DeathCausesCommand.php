@@ -47,7 +47,7 @@ class DeathCausesCommand extends Command
     public function handle()
     {
         $deathCausesCollector = new QuakeDataCollector(new DomainEventBus());
-        $deathCausesCollector->attachEventHandler(new LogFileSelectedEventHandler($playersKilledCollector->getCreateHumanLogFileUseCase()));
+        $deathCausesCollector->attachEventHandler(new LogFileSelectedEventHandler($deathCausesCollector->getCreateHumanLogFileUseCase()));
         $deathCausesCollector->attachEventHandler(new LogFileRejectedEventHandler());
         $deathCausesCollector->attachEventHandler(new HumanLogFileCreatedForDeathCausesEventHandler());
         $deathCausesCollector->attachEventHandler(new HumanLogFileRejectedEventHandler());

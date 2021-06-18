@@ -24,7 +24,7 @@ final class HumanLogFileCreatedForPlayersKilledEventHandler implements DomainEve
     {
         Log::info(__CLASS__);
         $rows = array_map(function ($row) {
-            return ['who_killed' => $row->getPlayerWhoKilled(), 'who_died' => $row->getPlayerWhoDied(), 'means' => $row->getMeanOfDeath()];
+            return ['who_killed' => $row->getPlayerWhoKilled(), 'who_died' => $row->getPlayerWhoDied(), 'means_of_death' => $row->getMeanOfDeath()];
         }, $domainEvent->humanLogFile->getRows());
 
         $inputCase = new FindPlayersKilledInput($rows);

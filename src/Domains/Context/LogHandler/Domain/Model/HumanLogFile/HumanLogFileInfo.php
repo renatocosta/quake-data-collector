@@ -8,7 +8,7 @@ class HumanLogFileInfo
 
     const WHO_DIED_COLUMN = 'Who Died column';
 
-    const MEANS_COLUMN = 'Means column';
+    const MEANS_OF_DEATH_COLUMN = 'Means of death column';
 
     const ROWS_KEY = 'Rows';
 

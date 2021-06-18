@@ -15,19 +15,19 @@ final class HumanLogFileRow implements HumanLogFileRowable
 
     private string $whoDied;
 
-    private string $means;
+    private string $meansOfDeath;
 
-    public function __construct(string $whoKilled, string $whoDied, string $means)
+    public function __construct(string $whoKilled, string $whoDied, string $meansOfDeath)
     {
 
         $this->whoKilled = $whoKilled;
         $this->whoDied = $whoDied;
-        $this->means = $means;
+        $this->meansOfDeath = $meansOfDeath;
 
         try {
             Assert::lazy()->that($this->whoKilled, HumanLogFileInfo::WHO_KILLED_COLUMN)->notBlank()
                 ->that($this->whoDied, HumanLogFileInfo::WHO_DIED_COLUMN)->notBlank()
-                ->that($this->means, HumanLogFileInfo::MEANS_COLUMN)->notBlank()
+                ->that($this->meansOfDeath, HumanLogFileInfo::MEANS_OF_DEATH_COLUMN)->notBlank()
                 ->verifyNow();
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();
@@ -46,7 +46,7 @@ final class HumanLogFileRow implements HumanLogFileRowable
 
     public function getMeanOfDeath(): string
     {
-        return $this->means;
+        return $this->meansOfDeath;
     }
 
     public function isValid(): bool
@@ -61,6 +61,6 @@ final class HumanLogFileRow implements HumanLogFileRowable
 
     public function __toString(): string
     {
-        return sprintf('Who killed %s Who died %s means %s', $this->whoKilled, $this->whoDied, $this->means);
+        return sprintf('Who killed %s Who died %s means of death %s', $this->whoKilled, $this->whoDied, $this->meansOfDeath);
     }
 }

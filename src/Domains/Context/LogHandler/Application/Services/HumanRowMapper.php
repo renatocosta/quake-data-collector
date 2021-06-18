@@ -20,7 +20,7 @@ class HumanRowMapper implements RowMapped
         preg_match("/Kill: (\w+) (\w+) (\w+): (.+) killed (.+) by (.+)/", $rawRow, $matches);
 
         if (count($matches) > 0) {
-            $rowMapped = ['who_killed' => $matches[4], 'who_died' => $matches[5], 'means' => $matches[6]];
+            $rowMapped = ['who_killed' => $matches[4], 'who_died' => $matches[5], 'means_of_death' => $matches[6]];
         }
 
         return $rowMapped;
