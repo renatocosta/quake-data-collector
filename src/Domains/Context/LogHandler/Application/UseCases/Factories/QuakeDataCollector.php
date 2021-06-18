@@ -12,9 +12,12 @@ final class QuakeDataCollector extends QuakeDataCollectorFactory
         $this->addLogFile();
         $this->addHumanLogFile();
         $this->addPlayersKilled();
+        $this->addDeathCauses();
+        
         $this->addHumanLogFileUseCase();
         $this->addLogFileUseCase();
         $this->addPlayersKilledUseCase();
+        $this->addDeathCausesUseCase();
     }
 
     public function dispatch(): void

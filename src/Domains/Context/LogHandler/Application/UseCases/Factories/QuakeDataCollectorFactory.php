@@ -14,8 +14,12 @@ use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileUseCase
 use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFile;
 use Domains\Context\LogHandler\Domain\Model\HumanLogFile\HumanLogFileEntity;
 use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileInfo;
+use Domains\Context\MatchReporting\Application\UseCases\DeathCauses\FindDeathCausesUseCase;
+use Domains\Context\MatchReporting\Application\UseCases\DeathCauses\IFindDeathCausesUseCase;
 use Domains\Context\MatchReporting\Application\UseCases\PlayersKilled\FindPlayersKilledUseCase;
 use Domains\Context\MatchReporting\Application\UseCases\PlayersKilled\IFindPlayersKilledUseCase;
+use Domains\Context\MatchReporting\Domain\Model\DeathCauses\DeathCauses;
+use Domains\Context\MatchReporting\Domain\Model\DeathCauses\DeathCausesEntity;
 use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\PlayersKilled;
 use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\PlayersKilledEntity;
 
@@ -36,6 +40,10 @@ abstract class QuakeDataCollectorFactory
 
     protected IFindPlayersKilledUseCase $findPlayersKilledUseCase;
 
+    protected DeathCauses $deathCauses;
+
+    protected IFindDeathCausesUseCase $findDeathCausesUseCase;
+
     protected string $fileName;
 
     public function __construct(DomainEventBus $domainEventBus, string $fileName = LogFileInfo::DEFAULT_FILE_NAME)
@@ -50,6 +58,7 @@ abstract class QuakeDataCollectorFactory
         $this->domainEventBus->subscribe($eventHandlerAttachment);
     }
 
+    //Set up to Human Log File Use Case
     protected function addHumanLogFile(): void
     {
         $this->humanLogFile = new HumanLogFileEntity($this->domainEventBus);
@@ -65,6 +74,7 @@ abstract class QuakeDataCollectorFactory
         return $this->createHumanLogFileUseCase;
     }
 
+    //Set up Log File Use Case
     protected function addLogFile(): void
     {
         $this->logFile = new LogFileEntity($this->domainEventBus);
@@ -75,6 +85,7 @@ abstract class QuakeDataCollectorFactory
         $this->selectLogFileUseCase = new SelectLogFileUseCase($this->logFile);
     }
 
+    //Set up to Players Killed Use Case
     protected function addPlayersKilled(): void
     {
         $this->playersKilled = new PlayersKilledEntity($this->domainEventBus);
@@ -93,6 +104,27 @@ abstract class QuakeDataCollectorFactory
     public function getFindPlayersKilledUseCase(): IFindPlayersKilledUseCase
     {
         return $this->findPlayersKilledUseCase;
+    }
+
+    //Set up to Death Causes Use Cases
+    protected function addDeathCauses(): void
+    {
+        $this->deathCauses = new DeathCausesEntity($this->domainEventBus);
+    }
+
+    public function getDeathCauses(): DeathCauses
+    {
+        return $this->deathCauses;
+    }
+
+    protected function addDeathCausesUseCase(): void
+    {
+        $this->findDeathCausesUseCase = new FindDeathCausesUseCase($this->deathCauses);
+    }
+
+    public function getFindDeathCausesUseCase(): IFindDeathCausesUseCase
+    {
+        return $this->findDeathCausesUseCase;
     }
 
     protected abstract function build(): void;

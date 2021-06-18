@@ -7,6 +7,9 @@ use Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFi
 use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileRejectedEventHandler;
 use Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler;
 use Domains\Context\LogHandler\Application\UseCases\Factories\QuakeDataCollector;
+use Domains\Context\MatchReporting\Application\EventHandlers\DeathCauses\DeathCausesEventHandler;
+use Domains\Context\MatchReporting\Application\EventHandlers\DeathCauses\DeathCausesFailedEventHandler;
+use Domains\Context\MatchReporting\Domain\Model\DeathCauses\DeathCausesFailed;
 use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
 use Domains\CrossCutting\Domain\Application\Services\Common\MessageHandler;
 use Illuminate\Console\Command;
@@ -49,22 +52,26 @@ class DeathCausesCommand extends Command
         $deathCausesCollector = new QuakeDataCollector(new DomainEventBus());
         $deathCausesCollector->attachEventHandler(new LogFileSelectedEventHandler($deathCausesCollector->getCreateHumanLogFileUseCase()));
         $deathCausesCollector->attachEventHandler(new LogFileRejectedEventHandler());
-        $deathCausesCollector->attachEventHandler(new HumanLogFileCreatedForDeathCausesEventHandler());
+        $deathCausesCollector->attachEventHandler(new HumanLogFileCreatedForDeathCausesEventHandler($deathCausesCollector->getFindDeathCausesUseCase()));
         $deathCausesCollector->attachEventHandler(new HumanLogFileRejectedEventHandler());
-        //$deathCausesCollector->attachEventHandler(new PlayersKilledEventHandler());
-        //$deathCausesCollector->attachEventHandler(new PlayersKilledFailedEventHandler());
+        $deathCausesCollector->attachEventHandler(new DeathCausesEventHandler());
+        $deathCausesCollector->attachEventHandler(new DeathCausesFailedEventHandler());
         $deathCausesCollector->dispatch();
 
-        //Sending to Stdout
-        /*$players = $deathCausesCollector->getPlayersKilled();
-        $output = json_encode([
-            'game_1' => [
-                'total_kills' => $players->getTotalKills(),
-                'players' => array_keys($players->getPlayers()),
-                'kills' => $players->getPlayers()
-            ]
-        ], JSON_PRETTY_PRINT);
+        //Printing
+        $deathCauses = $deathCausesCollector->getDeathCauses();
+        $output = 'Sorry, something went wrong';
 
-        $this->output->writeln($output);*/
+        if ($deathCauses->isValid()) {
+            $output = json_encode([
+                'game_1' => [
+                    'kills_by_means' => $deathCauses->getCauses()
+                ]
+            ], JSON_PRETTY_PRINT);
+            $this->output->writeln($output);
+        } else {
+            $this->output->writeln('Sorry, something went wrong:');
+            $this->output->writeln(json_encode($deathCauses->getErrors()));
+        }
     }
 }

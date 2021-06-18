@@ -1,42 +1,35 @@
 <?php
 
-namespace Domains\Context\MatchReporting\Domain\Model\PlayersKilled;
+namespace Domains\Context\MatchReporting\Domain\Model\DeathCauses;
 
 use Assert\Assert;
 use Assert\AssertionFailedException;
+use Domains\CrossCutting\Domain\Model\ValueObjects\Identity\FindValueIn;
 
 final class Matcher implements Matchable
 {
 
     private array $errors = [];
 
-    private string $whoKilled;
+    private string $means;
 
-    private string $whoDied;
-
-    public function __construct(string $whoKilled, string $whoDied)
+    public function __construct(string $means)
     {
 
-        $this->whoKilled = $whoKilled;
-        $this->whoDied = $whoDied;
+        $this->means = $means;
 
         try {
-            Assert::lazy()->that($this->whoKilled, PlayerInfo::WHO_KILLED_COLUMN)->notBlank()
-                ->that($this->whoDied, PlayerInfo::WHO_DIED_COLUMN)->notBlank()
+            Assert::lazy()->that($this->means, DeathCauseInfo::MEANS)->notBlank()
                 ->verifyNow();
+            new FindValueIn($this->means, DeathCauseInfo::CAUSES);
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();
         }
     }
 
-    public function getPlayerWhoKilled(): string
+    public function means(): string
     {
-        return $this->whoKilled;
-    }
-
-    public function getPlayerWhoDied(): string
-    {
-        return $this->whoDied;
+        return $this->means;
     }
 
     public function isValid(): bool
@@ -51,6 +44,6 @@ final class Matcher implements Matchable
 
     public function __toString(): string
     {
-        return sprintf('Who killed %s Who died %s', $this->whoKilled, $this->whoDied);
+        return sprintf('Means %s', $this->means);
     }
 }

@@ -54,16 +54,20 @@ class PlayersKilledCommand extends Command
         $playersKilledCollector->attachEventHandler(new PlayersKilledFailedEventHandler());
         $playersKilledCollector->dispatch();
 
-        //Sending to Stdout
+        //Printing
         $players = $playersKilledCollector->getPlayersKilled();
-        $output = json_encode([
-            'game_1' => [
-                'total_kills' => $players->getTotalKills(),
-                'players' => array_keys($players->getPlayers()),
-                'kills' => $players->getPlayers()
-            ]
-        ], JSON_PRETTY_PRINT);
-
-        $this->output->writeln($output);
+        if ($players->isValid()) {
+            $output = json_encode([
+                'game_1' => [
+                    'total_kills' => $players->getTotalKills(),
+                    'players' => array_keys($players->getPlayers()),
+                    'kills' => $players->getPlayers()
+                ]
+            ], JSON_PRETTY_PRINT);
+            $this->output->writeln($output);
+        } else {
+            $this->output->writeln('Sorry, something went wrong:');
+            $this->output->writeln(json_encode($players->getErrors()));
+        }
     }
 }

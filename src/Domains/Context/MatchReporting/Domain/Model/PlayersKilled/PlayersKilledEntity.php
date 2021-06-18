@@ -41,6 +41,7 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
 
         if (!$match->isValid()) {
             $this->errors[] = $match->getErrors();
+            return;
         }
 
         $killer = $match->getPlayerWhoKilled();
