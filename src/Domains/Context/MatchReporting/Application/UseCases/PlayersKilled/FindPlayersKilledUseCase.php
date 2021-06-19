@@ -20,6 +20,7 @@ final class FindPlayersKilledUseCase implements IFindPlayersKilledUseCase
         foreach ($input->rows as $row) {
             $this->playersKilled->computeKills(new Matcher($row['who_killed'], $row['who_died']));
         }
+
         $this->playersKilled->find();
     }
 }

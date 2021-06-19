@@ -2,6 +2,7 @@
 
 namespace Tests\Context\MatchReporting\UnitTests;
 
+use DG\BypassFinals;
 use Domains\Context\MatchReporting\Application\UseCases\PlayersKilled\FindPlayersKilledInput;
 use Domains\Context\MatchReporting\Application\UseCases\PlayersKilled\FindPlayersKilledUseCase;
 use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\Matcher;
@@ -11,6 +12,12 @@ use Tests\TestCase;
 
 class PlayersKilledTest extends TestCase
 {
+
+    public static function setUpBeforeClass(): void
+    {
+        BypassFinals::enable();
+    }
+
     /**
      * @testWith ["ronaldinho", ""]
      *           ["", "Fagundes"]
@@ -35,21 +42,25 @@ class PlayersKilledTest extends TestCase
 
     public function testShouldFailToCountableRowsIfEntryIsInvalid()
     {
-        $playersKilled = new PlayersKilledEntity(new DomainEventBus());
+        $playersKilled = \Mockery::spy(new PlayersKilledEntity(new DomainEventBus()));
         $playersKilled->computeKills(new Matcher('', 'ciclano'));
         $playersKilled->computeKills(new Matcher('', ''));
         $playersKilled->computeKills(new Matcher('garotinho', ''));
         $playersKilled->find();
+
+        $playersKilled->shouldNotHaveReceived('isKillerFound');
+        $playersKilled->shouldNotHaveReceived('isEligibleToBeAPlayer');
 
         $this->assertFalse($playersKilled->isValid());
     }
 
     public function testShouldBeAbleToFindPlayersKilledSuccessfully()
     {
-        $playersKilled = new PlayersKilledEntity(new DomainEventBus());
+        $playersKilled = \Mockery::spy(new PlayersKilledEntity(new DomainEventBus()));
         $findPlayersKilledUseCase = new FindPlayersKilledUseCase($playersKilled);
         $rows = [['who_killed' => 'fulano', 'who_died' => 'ciclano'], ['who_killed' => 'ciclano', 'who_died' => 'garotinho']];
         $findPlayersKilledUseCase->execute(new FindPlayersKilledInput($rows));
+        $playersKilled->shouldHaveReceived('find')->once();
         $this->assertCount(count($rows), $playersKilled->getPlayers());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Context\LogHandler\UnitTests;
 
+use DG\BypassFinals;
 use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileException;
 use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileInput;
 use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileUseCase;
@@ -12,6 +13,11 @@ use Tests\TestCase;
 
 class LogFileTest extends TestCase
 {
+
+    public static function setUpBeforeClass(): void
+    {
+        BypassFinals::enable();
+    }
 
     public function testShouldFailToFileMetadataValuesAreMissing()
     {
@@ -33,9 +39,10 @@ class LogFileTest extends TestCase
     public function testShouldBeAbleToSelectLogFileSuccessfully()
     {
 
-        $logFile = new LogFileEntity(new DomainEventBus());
+        $logFile = \Mockery::spy(new LogFileEntity(new DomainEventBus()));
         $selectFileUseCase = new SelectLogFileUseCase($logFile);
         $selectFileUseCase->execute(new SelectLogFileInput('qgames.log'));
+        $logFile->shouldHaveReceived('extractOf')->once();
         $this->assertTrue($logFile->isValid());
     }
 }

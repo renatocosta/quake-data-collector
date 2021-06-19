@@ -25,11 +25,13 @@ class DeathCausesTest extends TestCase
 
     public function testShouldFailToCountableRowsIfEntryIsInvalid()
     {
-        $deathCauses = new DeathCausesEntity(new DomainEventBus());
+        $deathCauses = \Mockery::spy(new DeathCausesEntity(new DomainEventBus()));
         $deathCauses->computeCause(new Matcher('No such means'));
         $deathCauses->computeCause(new Matcher(DeathCauseInfo::MOD_SHOTGUN));
         $deathCauses->computeCause(new Matcher(DeathCauseInfo::MOD_CHAINGUN));
         $deathCauses->find();
+
+        $deathCauses->shouldHaveReceived('find');
 
         $this->assertFalse($deathCauses->isValid());
     }
