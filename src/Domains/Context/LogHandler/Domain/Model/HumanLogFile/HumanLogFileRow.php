@@ -23,11 +23,14 @@ final class HumanLogFileRow implements HumanLogFileRowable
         $this->whoKilled = $whoKilled;
         $this->whoDied = $whoDied;
         $this->meansOfDeath = $meansOfDeath;
+    }
 
+    public function validation(): void
+    {
         try {
-            Assert::lazy()->that($this->whoKilled, HumanLogFileInfo::WHO_KILLED_COLUMN)->notBlank()
-                ->that($this->whoDied, HumanLogFileInfo::WHO_DIED_COLUMN)->notBlank()
-                ->that($this->meansOfDeath, HumanLogFileInfo::MEANS_OF_DEATH_COLUMN)->notBlank()
+            Assert::lazy()->that($this->whoKilled, HumanLogFileInfo::WHO_KILLED_COLUMN)->notEmpty()
+                ->that($this->whoDied, HumanLogFileInfo::WHO_DIED_COLUMN)->notEmpty()
+                ->that($this->meansOfDeath, HumanLogFileInfo::MEANS_OF_DEATH_COLUMN)->notEmpty()
                 ->verifyNow();
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();

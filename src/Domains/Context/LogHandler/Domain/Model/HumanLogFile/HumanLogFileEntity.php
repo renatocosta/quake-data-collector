@@ -23,16 +23,22 @@ final class HumanLogFileEntity extends AggregateRoot implements HumanLogFile
         parent::__construct($domainEventBus);
     }
 
-    public function create(array $rows): void
+    public function addRow(HumanLogFileRow $row): void
     {
-        $this->rows = $rows;
+        $row->validation();
+        if (!$row->isValid()) $this->errorInRows = true;
+        $this->rows[] = $row;
+    }
+
+    public function create(): void
+    {
 
         try {
             Assert::lazy()
-                ->that($rows, HumanLogFileInfo::ROWS_KEY)->minCount(1)
+                ->that($this->rows, HumanLogFileInfo::ROWS_KEY)->minCount(1)
                 ->that($this->errorInRows, HumanLogFileInfo::SOMETHING_WENT_WRONG_WHILE_READING_ROWS_MESSAGE)->false()
                 ->verifyNow();
-            $this->totalKills = count($rows);
+            $this->totalKills = count($this->rows);
             $this->raise(new HumanLogFileCreated($this));
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();
@@ -48,16 +54,6 @@ final class HumanLogFileEntity extends AggregateRoot implements HumanLogFile
     public function getRows(): array
     {
         return $this->rows;
-    }
-
-    public function setErrorInRowsFound(bool $errorState): void
-    {
-        $this->errorInRows = $errorState;
-    }
-
-    public function errorInRowsFound(): bool
-    {
-        return $this->errorInRows;
     }
 
     public function isValid(): bool

@@ -8,19 +8,16 @@ interface HumanLogFile extends Validatable
 {
 
     /**
-     * @param HumanLogFileRow[] $rows
+     * @param HumanLogFileRow $row
      */
-    public function create(array $rows): void;
+    public function addRow(HumanLogFileRow $row): void;
+
+    public function create(): void;
 
     public function getTotalKills(): int;
-
-    public function setErrorInRowsFound(bool $errorState): void;
-
-    public function errorInRowsFound(): bool;
 
     /**
      * @return HumanLogFileRow[]
      */
     public function getRows(): array;
-
 }

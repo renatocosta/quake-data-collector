@@ -12,4 +12,6 @@ interface HumanLogFileRowable extends Validatable
     public function getPlayerWhoDied(): string;
 
     public function getMeanOfDeath(): string;
+
+    public function validation(): void;
 }

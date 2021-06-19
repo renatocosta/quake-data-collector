@@ -21,8 +21,9 @@ final class Matcher implements Matchable
         $this->whoDied = $whoDied;
 
         try {
-            Assert::lazy()->that($this->whoKilled, PlayerInfo::WHO_KILLED_COLUMN)->notBlank()
-                ->that($this->whoDied, PlayerInfo::WHO_DIED_COLUMN)->notBlank()
+            Assert::lazy()->that($this->whoKilled, PlayerInfo::WHO_KILLED_COLUMN)->notEmpty()
+                ->that($this->whoDied, PlayerInfo::WHO_DIED_COLUMN)->notEmpty()
+                ->that(strtoupper($this->whoKilled), PlayerInfo::BOTH_PLAYERS_HAVE_THE_SAME_NAME)->notEq(strtoupper($this->whoDied))
                 ->verifyNow();
         } catch (AssertionFailedException $e) {
             $this->errors[] = $e->getMessage();

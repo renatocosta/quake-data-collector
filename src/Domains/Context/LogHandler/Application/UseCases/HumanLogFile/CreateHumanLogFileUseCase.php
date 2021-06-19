@@ -22,24 +22,14 @@ final class CreateHumanLogFileUseCase implements ICreateHumanLogFileUseCase
     public function execute(CreateHumanLogFileInput $input): void
     {
 
-        $rows = [];
-
         for ($input->content->rewind(); $input->content->valid(); $input->content->next()) {
 
             $rowMapped = $this->rowMapper->map($input->content->current());
             if (count($rowMapped) > 0) {
-
-                $humanLogFile = new HumanLogFileRow($rowMapped['who_killed'], $rowMapped['who_died'], $rowMapped['means_of_death']);
-
-                if (!$humanLogFile->isValid()) {
-                    $this->humanLogFile->setErrorInRowsFound(true);
-                    $input->content->next();
-                }
-
-                $rows[] = $humanLogFile;
+                $this->humanLogFile->addRow(new HumanLogFileRow($rowMapped['who_killed'], $rowMapped['who_died'], $rowMapped['means_of_death']));
             }
         }
 
-        $this->humanLogFile->create($rows);
+        $this->humanLogFile->create();
     }
 }

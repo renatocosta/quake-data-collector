@@ -60,7 +60,6 @@ class DeathCausesCommand extends Command
 
         //Printing
         $deathCauses = $deathCausesCollector->getDeathCauses();
-        $output = 'Sorry, something went wrong';
 
         if ($deathCauses->isValid()) {
             $output = json_encode([

@@ -19,8 +19,9 @@ final class LogFileMetadata
 
     public function validation()
     {
-        Assert::that($this->size, sprintf(LogFileInfo::MIN_SIZE_REQUIRED_MESSAGE, LogFileInfo::MIN_SIZE_REQUIRED))->greaterOrEqualThan(LogFileInfo::MIN_SIZE_REQUIRED);
-        Assert::that($this->extension, sprintf(LogFileInfo::MISSING_FILE_EXTENSION_MESSAGE, LogFileInfo::DEFAULT_FILE_EXTENSION))->eq(LogFileInfo::DEFAULT_FILE_EXTENSION);
+        Assert::lazy()->that($this->size, sprintf(LogFileInfo::MIN_SIZE_REQUIRED_MESSAGE, LogFileInfo::MIN_SIZE_REQUIRED))->greaterOrEqualThan(LogFileInfo::MIN_SIZE_REQUIRED)
+            ->that($this->extension, sprintf(LogFileInfo::MISSING_FILE_EXTENSION_MESSAGE, LogFileInfo::DEFAULT_FILE_EXTENSION))->eq(LogFileInfo::DEFAULT_FILE_EXTENSION)
+            ->verifyNow();
     }
 
     public function __toString(): string

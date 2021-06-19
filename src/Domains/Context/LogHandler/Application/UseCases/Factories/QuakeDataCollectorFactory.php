@@ -64,6 +64,11 @@ abstract class QuakeDataCollectorFactory
         $this->humanLogFile = new HumanLogFileEntity($this->domainEventBus);
     }
 
+    public function getHumanLogFile(): HumanLogFile
+    {
+        return $this->humanLogFile;
+    }
+
     protected function addHumanLogFileUseCase(): void
     {
         $this->createHumanLogFileUseCase = new CreateHumanLogFileUseCase($this->humanLogFile, new HumanRowMapper());

@@ -2,45 +2,40 @@
 
 namespace Tests\Context\LogHandler\UnitTests;
 
-use DG\BypassFinals;
-use Domains\Context\LogHandler\Application\UseCases\Factories\QuakeDataCollector;
-use \Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileException;
-use Mockery;
+use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileException;
+use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileInput;
+use Domains\Context\LogHandler\Application\UseCases\LogFile\SelectLogFileUseCase;
+use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileEntity;
+use Domains\Context\LogHandler\Domain\Model\LogFile\LogFileMetadata;
+use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
 use Tests\TestCase;
 
 class LogFileTest extends TestCase
 {
 
-    use \Tests\Context\LogHandler\LogHandlerFactoryTestProvider;
-
-    public static function setUpBeforeClass(): void
+    public function testShouldFailToFileMetadataValuesAreMissing()
     {
-        BypassFinals::enable();
-    }
-
-    public function setup(): void
-    {
-        parent::setUp();
-        $this->loadDependencies();
+        $file = new \SplFileObject(storage_path('app/public/qgames.log'));
+        $logFile = new LogFileEntity(new DomainEventBus());
+        $logFile->extractOf($file, new LogFileMetadata(0, 'log'));
+        $this->assertFalse($logFile->isValid());
     }
 
     public function testShouldFailToLogFileForInvalidName()
     {
         $this->expectException(SelectLogFileException::class);
 
-        $deathCausesCollector = new QuakeDataCollector($this->domainEventBus, 'invalid_filename.log');
-
-        $deathCausesCollectorMock = \Mockery::mock($deathCausesCollector)->shouldAllowMockingProtectedMethods();
-        $deathCausesCollectorMock->dispatch();
+        $logFile = new LogFileEntity(new DomainEventBus());
+        $selectFileUseCase = new SelectLogFileUseCase($logFile);
+        $selectFileUseCase->execute(new SelectLogFileInput('invalid_filename.log'));
     }
 
-    public function testShouldFailToLogFileForInvalidContent()
+    public function testShouldBeAbleToSelectLogFileSuccessfully()
     {
-        $this->expectException(SelectLogFileException::class);
 
-        $deathCausesCollector = new QuakeDataCollector($this->domainEventBus, 'blank_file.log');
-
-        $deathCausesCollectorMock = \Mockery::mock($deathCausesCollector)->shouldAllowMockingProtectedMethods();
-        $deathCausesCollectorMock->dispatch();
+        $logFile = new LogFileEntity(new DomainEventBus());
+        $selectFileUseCase = new SelectLogFileUseCase($logFile);
+        $selectFileUseCase->execute(new SelectLogFileInput('qgames.log'));
+        $this->assertTrue($logFile->isValid());
     }
 }
