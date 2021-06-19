@@ -6,4 +6,6 @@ services:
     php-fpm:
       container_name: cloudwalk-phpfpm
       build: .
+      volumes:
+        - .:/var/www
       tty: true

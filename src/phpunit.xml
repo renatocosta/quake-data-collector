@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="true" testdox="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">Domains/Context/LogHandler</directory>
+            <directory suffix=".php">Domains/Context/MatchReporting</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">Domains/Context/LogHandler/Infrastructure</directory>
+            <directory suffix=".php">Domains/Context/LogHandler/Inbound</directory>
+            <directory suffix=".php">Domains/Context/LogHandler/Outbound</directory>
+            <directory suffix=".php">Domains/Context/MatchReporting/Infrastructure</directory>
+            <directory suffix=".php">Domains/Context/MatchReporting/Inbound</directory>
+            <directory suffix=".php">Domains/Context/MatchReporting/Outbound</directory>
+            <directory prefix="Reporting">Domains/Context/MatchReporting/Application/UseCases</directory>
+            <directory suffix=".php">Domains/Context/MatchReporting/Application/EventHandlers</directory>
+            <directory suffix=".php">Domains/Context/MatchReporting/Application/Services/DataSource/Reporting</directory>
+            <directory suffix="NotFound.php">Domains/Context/MatchReporting/*</directory>
+        </exclude>
+    </coverage>
+    <testsuites>
+        <testsuite name="LogHandler">
+            <directory suffix="Test.php">./tests/Context/LogHandler</directory>
+        </testsuite>
+        <testsuite name="MatchReporting">
+            <directory suffix="Test.php">./tests/Context/MatchReporting</directory>
+        </testsuite>
+        <testsuite name="Quake3ArenaLogging">
+            <directory suffix="Test.php">./tests/Context/Quake3ArenaLogging</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
