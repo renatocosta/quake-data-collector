@@ -1,6 +1,0 @@
-*.conf
-!default.staging.conf
-!control.staging.conf
-!mq.staging.conf
-!mail.staging.conf
-!../../default-generic-nginx.conf

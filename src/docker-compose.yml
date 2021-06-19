@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+
+### PHP-FPM Container #######################################
+    php-fpm:
+      container_name: cloudwalk-phpfpm
+      build: .
+      tty: true
