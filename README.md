@@ -31,8 +31,9 @@ BUILD IMAGE : docker-compose build &&  docker-compose up -d
 3) End-to-End: docker-compose exec php-fpm framework/vendor/bin/phpunit --testsuite Quake3ArenaLogging --coverage-html framework/storage/tests
 
 ### Coverage Report: framework/storage/tests/
-![Image](./assets/Coverage.png?raw=true)
 ```
+![Image](./assets/Coverage.png?raw=true)
+![Image](./assets/suite-tests.png?raw=true)
 
 ## Let's Run the Application 
 ```
@@ -44,3 +45,5 @@ BUILD IMAGE : docker-compose build &&  docker-compose up -d
 
 Go through all of the learning journey using Event Storming for understanding the business needs as shown below
 
+![Image](./assets/EventStorming.jpg?raw=true)
+![Image](./assets/EventStormingOutcome.jpg?raw=true)
