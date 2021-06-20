@@ -41,8 +41,6 @@ BUILD IMAGE : docker-compose build &&  docker-compose up -d
 2) Death Causes:   docker-compose exec php-fpm php framework/artisan deathCauses
 ### Logs: framework/storage/logs/laravel.log
 ```
-![Image](./assets/PlayersKilled.jpg?raw=true)
-![Image](./assets/DeathCauses.jpg?raw=true)
 
 ## Event Storming
 
