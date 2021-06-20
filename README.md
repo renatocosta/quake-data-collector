@@ -51,5 +51,10 @@ Go through all of the learning journey using Event Storming for understanding th
 ### Steps
 ![Image](./assets/EventStorming.jpg?raw=true)
 
-### Once mapped you can take a look into bounded contexts
-![Image](./assets/EventStormingOutcome.jpg?raw=true)
+## Bounded contexts
+
+### Log
+
+[LogHandler](src/Domains/Context/LogHandler)
+
+[MatchReporting](src/Domains/Context/MatchReporting)
