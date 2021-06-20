@@ -51,5 +51,5 @@ Go through all of the learning journey using Event Storming for understanding th
 ### Steps
 ![Image](./assets/EventStorming.jpg?raw=true)
 
-### Once steps were implemented, then we have the bounded contexts
+### Once mapped you can take a look into bounded contexts
 ![Image](./assets/EventStormingOutcome.jpg?raw=true)
