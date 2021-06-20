@@ -45,5 +45,8 @@ BUILD IMAGE : docker-compose build &&  docker-compose up -d
 
 Go through all of the learning journey using Event Storming for understanding the business needs as shown below
 
+### Steps
 ![Image](./assets/EventStorming.jpg?raw=true)
+
+### Once steps were implemented, then we have the bounded contexts
 ![Image](./assets/EventStormingOutcome.jpg?raw=true)
