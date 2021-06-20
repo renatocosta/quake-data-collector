@@ -31,7 +31,7 @@ BUILD IMAGE : docker-compose build &&  docker-compose up -d
 3) End-to-End: docker-compose exec php-fpm framework/vendor/bin/phpunit --testsuite Quake3ArenaLogging --coverage-html framework/storage/tests
 
 ### Coverage Report: framework/storage/tests/
-![Alt text](/assets/Coverage.png?raw=true)
+![Image]((assets/Coverage.png?raw=true)<br><br>
 ```
 
 ## Let's Run the Application 
