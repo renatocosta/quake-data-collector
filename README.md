@@ -41,8 +41,8 @@ BUILD IMAGE : docker-compose build &&  docker-compose up -d
 2) Death Causes:   docker-compose exec php-fpm php framework/artisan deathCauses
 ### Logs: framework/storage/logs/laravel.log
 ```
-![Image](./assets/PlayersKilled.png?raw=true)
-![Image](./assets/DeathCauses.png?raw=true)
+![Image](./assets/PlayersKilled.jpg?raw=true)
+![Image](./assets/DeathCauses.jpg?raw=true)
 
 ## Event Storming
 
@@ -52,8 +52,6 @@ Go through all of the learning journey using Event Storming for understanding th
 ![Image](./assets/EventStorming.jpg?raw=true)
 
 ## Bounded contexts
-
-### Log
 
 [LogHandler](src/Domains/Context/LogHandler)
 

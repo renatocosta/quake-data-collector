@@ -1,1 +1,1 @@
-![Image](../../../assets/LogHandler.jpg?raw=true)
+![Image](../../../../assets/LogHandler.jpg?raw=true)
