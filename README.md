@@ -16,7 +16,7 @@ From your command line, clone and run Quake Data Collector:
 git clone https://github.com/renatocosta/quake-data-collector.git
 
 # Go into the repository
-cd quake-data-collector
+cd quake-data-collector/src
 
 ### Docker Commands
 BUILD IMAGE : docker-compose build &&  docker-compose up -d
