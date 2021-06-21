@@ -1,11 +1,7 @@
-/node_modules
-/public/hot
-/public/storage/tests
-/storage/*.key
-/vendor
+/framework/storage/tests/*
+/framework/storage/logs/*
 /.idea
 /.vscode
-/.vagrant
 Homestead.json
 Homestead.yaml
 npm-debug.log
