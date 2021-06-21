@@ -7,16 +7,9 @@
         </include>
         <exclude>
             <directory suffix=".php">Domains/Context/LogHandler/Infrastructure</directory>
-            <directory suffix=".php">Domains/Context/LogHandler/Inbound</directory>
-            <directory suffix=".php">Domains/Context/LogHandler/Outbound</directory>
             <directory suffix=".php">Domains/Context/LogHandler/Application/EventHandlers</directory>
-
             <directory suffix=".php">Domains/Context/MatchReporting/Infrastructure</directory>
-            <directory suffix=".php">Domains/Context/MatchReporting/Inbound</directory>
-            <directory suffix=".php">Domains/Context/MatchReporting/Outbound</directory>
             <directory suffix=".php">Domains/Context/MatchReporting/Application/EventHandlers</directory>
-
-
         </exclude>
     </coverage>
     <testsuites>
