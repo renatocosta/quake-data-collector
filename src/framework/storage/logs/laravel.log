@@ -48,3 +48,34 @@
 [2021-06-21 15:36:47] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 15:36:47.902724  
 [2021-06-21 15:36:47] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
 [2021-06-21 15:36:47] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 15:36:47.908326  
+[2021-06-21 17:10:57] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-21 17:10:57.419027  
+[2021-06-21 17:10:57] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:10:57.501793  
+[2021-06-21 17:10:57] production.INFO: Domain event LogFileRejected runned at 2021-06-21 17:10:57.532634  
+[2021-06-21 17:10:57] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
+[2021-06-21 17:10:57] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:10:57.613727  
+[2021-06-21 17:11:07] production.INFO: Domain event DeathCausesFailed runned at 2021-06-21 17:11:07.231603  
+[2021-06-21 17:11:07] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:11:07.264346  
+[2021-06-21 17:11:07] production.INFO: Domain event PlayersKilledFailed runned at 2021-06-21 17:11:07.409912  
+[2021-06-21 17:11:07] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-21 17:11:07.450918  
+[2021-06-21 17:11:18] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:11:18.642963  
+[2021-06-21 17:11:18] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-21 17:11:18] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:11:18.653361  
+[2021-06-21 17:11:18] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
+[2021-06-21 17:11:18] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:11:18.656426  
+[2021-06-21 17:11:18] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:11:18.707632  
+[2021-06-21 17:11:18] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-21 17:11:18] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:11:18.714621  
+[2021-06-21 17:11:18] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
+[2021-06-21 17:11:18] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:11:18.718742  
+[2021-06-21 17:11:37] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:11:37.524532  
+[2021-06-21 17:11:37] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-21 17:11:37] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:11:37.530802  
+[2021-06-21 17:11:37] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-21 17:11:37] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-21 17:11:37.533556  
+[2021-06-21 17:11:37] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-21 17:11:45] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:11:45.168594  
+[2021-06-21 17:11:45] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-21 17:11:45] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:11:45.174834  
+[2021-06-21 17:11:45] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
+[2021-06-21 17:11:45] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:11:45.176634  
+[2021-06-21 17:11:45] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\DeathCauses\DeathCausesEventHandler  

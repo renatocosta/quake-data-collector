@@ -61,10 +61,8 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
     {
         foreach ($this->matches as $match) {
 
-            if (!$this->isEligibleToBeAPlayer($match['who_killed'])) {
-                if ($this->isKillerFound($match['who_died'])) {
-                    $this->players[$match['who_died']]['kills']--;
-                }
+            if (!$this->isEligibleToBeAPlayer($match['who_killed']) && $this->isKillerFound($match['who_died'])) {
+                $this->players[$match['who_died']]['kills']--;
             }
         }
     }
