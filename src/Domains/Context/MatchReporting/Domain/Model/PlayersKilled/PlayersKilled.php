@@ -13,7 +13,7 @@ interface PlayersKilled extends Validatable
 
     public function computeKills(Matchable $match): void;
 
-    public function isEligibleToBeAPlayer(string $killer): bool;
+    public function isEligibleToBeAPlayer(Matchable $match): bool;
 
     public function consolidate(): void;
 

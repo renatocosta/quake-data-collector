@@ -2,6 +2,8 @@
 
 namespace Domains\Context\MatchReporting\Domain\Model\PlayersKilled\State;
 
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\Matchable;
+
 class BasicPlayer implements Player
 {
     private PlayerState $killedPlayer;
@@ -18,24 +20,24 @@ class BasicPlayer implements Player
         $this->deadPlayer = $deadPlayer;
     }
 
-    public function killUp(array $player): void
+    public function killUp(Matchable $match): void
     {
-        if (!isset($this->players[$player['who_killed']]['kills'])) {
-            $this->players[$player['who_killed']]['kills'] = $this->startKill;
+        if (!isset($this->players[$match->getPlayerWhoKilled()]['kills'])) {
+            $this->players[$match->getPlayerWhoKilled()]['kills'] = $this->startKill;
         }
 
-        $this->killedPlayer->computeKills($this->players[$player['who_killed']]['kills']);
-        $this->players[$player['who_killed']] = ['who_killed' => $player['who_killed'], 'who_died' => $player['who_died'], 'kills' => $this->killedPlayer->getKills()];
+        $this->killedPlayer->computeKills($this->players[$match->getPlayerWhoKilled()]['kills']);
+        $this->players[$match->getPlayerWhoKilled()] = ['who_killed' => $match->getPlayerWhoKilled(), 'who_died' => $match->getPlayerWhoDied(), 'kills' => $this->killedPlayer->getKills()];
     }
 
-    public function killDown(array $player): void
+    public function killDown(Matchable $match): void
     {
-        if (!isset($this->players[$player['who_died']]['kills'])) {
-            $this->players[$player['who_died']]['kills'] = $this->startKill;
+        if (!isset($this->players[$match->getPlayerWhoDied()]['kills'])) {
+            $this->players[$match->getPlayerWhoDied()]['kills'] = $this->startKill;
         }
 
-        $this->deadPlayer->computeKills($this->players[$player['who_died']]['kills']);
-        $this->players[$player['who_died']] = ['who_killed' => $player['who_died'], 'who_died' => $player['who_died'], 'kills' => $this->deadPlayer->getKills()];
+        $this->deadPlayer->computeKills($this->players[$match->getPlayerWhoDied()]['kills']);
+        $this->players[$match->getPlayerWhoDied()] = ['who_killed' => $match->getPlayerWhoDied(), 'who_died' => '', 'kills' => $this->deadPlayer->getKills()];
     }
 
     public function getPlayers(): array

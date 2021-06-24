@@ -13,14 +13,14 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
 
     private int $totalKills = 0;
 
-    private Player $player;
+    private Player $playerState;
 
     private array $players = [];
 
-    public function __construct(DomainEventBus $domainEventBus, Player $player)
+    public function __construct(DomainEventBus $domainEventBus, Player $playerState)
     {
         parent::__construct($domainEventBus);
-        $this->player = $player;
+        $this->playerState = $playerState;
     }
 
     public function find(): void
@@ -41,18 +41,16 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
             return;
         }
 
-        $matchData = ['who_killed' => $match->getPlayerWhoKilled(), 'who_died' => $match->getPlayerWhoDied()];
-
-        if (!$this->isEligibleToBeAPlayer($matchData['who_killed'])) {
-            $this->player->killDown($matchData);
+        if (!$this->isEligibleToBeAPlayer($match)) {
+            $this->playerState->killDown($match);
         }
 
-        $this->player->killUp($matchData);
+        $this->playerState->killUp($match);
     }
 
     public function consolidate(): void
     {
-        $this->players = $this->player->getPlayers();
+        $this->players = $this->playerState->getPlayers();
         $this->totalKills = array_sum(array_column($this->players, 'kills'));
         if (array_key_exists('world', $this->players)) {
             unset($this->players['world']);
@@ -60,9 +58,9 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
         array_multisort(array_column($this->players, 'kills'), SORT_DESC, $this->players);
     }
 
-    public function isEligibleToBeAPlayer(string $killer): bool
+    public function isEligibleToBeAPlayer(Matchable $match): bool
     {
-        return $killer != PlayerInfo::WORLD_KILLER;
+        return $match->getPlayerWhoKilled() != PlayerInfo::WORLD_KILLER;
     }
 
     public function getTotalKills(): int
