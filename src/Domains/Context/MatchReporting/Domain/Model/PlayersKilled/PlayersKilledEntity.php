@@ -26,7 +26,7 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
     public function find(): void
     {
 
-        if (count($this->player->getPlayers()) > 0 && $this->isValid()) {
+        if (count($this->players) > 0 && $this->isValid()) {
             $this->raise(new PlayersKilledWereFound($this));
         } else {
             $this->raise(new PlayersKilledFailed($this));
