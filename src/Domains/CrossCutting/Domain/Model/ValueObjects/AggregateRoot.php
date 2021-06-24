@@ -11,9 +11,9 @@ abstract class AggregateRoot
     /**
      * @var DomainEventBus
      */
-    protected $domainEventBus;
+    private $domainEventBus;
 
-    protected function __construct(DomainEventBus $domainEventBus)
+    public function __construct(DomainEventBus $domainEventBus)
     {
         $this->domainEventBus = $domainEventBus;
     }

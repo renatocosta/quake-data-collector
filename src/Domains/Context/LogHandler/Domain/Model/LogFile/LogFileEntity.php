@@ -18,11 +18,6 @@ final class LogFileEntity extends AggregateRoot implements LogFile
 
     private array $errors = [];
 
-    public function __construct(DomainEventBus $domainEventBus)
-    {
-        parent::__construct($domainEventBus);
-    }
-
     public function extractOf(\SplFileObject $file, LogFileMetadata $metaData): void
     {
 

@@ -1,38 +1,98 @@
-[2021-06-21 17:18:37] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-21 17:18:37.897899  
-[2021-06-21 17:18:37] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:18:37.987767  
-[2021-06-21 17:18:38] production.INFO: Domain event LogFileRejected runned at 2021-06-21 17:18:38.019778  
-[2021-06-21 17:18:38] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
-[2021-06-21 17:18:38] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:18:38.103834  
-[2021-06-21 17:18:48] production.INFO: Domain event DeathCausesFailed runned at 2021-06-21 17:18:48.352817  
-[2021-06-21 17:18:48] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:18:48.384088  
-[2021-06-21 17:18:48] production.INFO: Domain event PlayersKilledFailed runned at 2021-06-21 17:18:48.529499  
-[2021-06-21 17:18:48] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-21 17:18:48.569081  
-[2021-06-21 17:18:55] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:18:55.783680  
-[2021-06-21 17:18:55] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
-[2021-06-21 17:18:55] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:18:55.795466  
-[2021-06-21 17:18:55] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
-[2021-06-21 17:18:55] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:18:55.798576  
-[2021-06-21 17:18:55] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:18:55.852517  
-[2021-06-21 17:18:55] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
-[2021-06-21 17:18:55] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:18:55.860269  
-[2021-06-21 17:18:55] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
-[2021-06-21 17:18:55] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:18:55.864559  
-[2021-06-21 17:20:07] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-21 17:20:07.139874  
-[2021-06-21 17:20:07] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:20:07.225906  
-[2021-06-21 17:20:07] production.INFO: Domain event LogFileRejected runned at 2021-06-21 17:20:07.257492  
-[2021-06-21 17:20:07] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
-[2021-06-21 17:20:07] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:20:07.339475  
-[2021-06-21 17:20:07] production.INFO: Domain event DeathCausesFailed runned at 2021-06-21 17:20:07.431053  
-[2021-06-21 17:20:07] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:20:07.463159  
-[2021-06-21 17:20:07] production.INFO: Domain event PlayersKilledFailed runned at 2021-06-21 17:20:07.610575  
-[2021-06-21 17:20:07] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-21 17:20:07.650794  
-[2021-06-21 17:20:07] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:20:07.726552  
-[2021-06-21 17:20:07] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
-[2021-06-21 17:20:07] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:20:07.734706  
-[2021-06-21 17:20:07] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
-[2021-06-21 17:20:07] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:20:07.737281  
-[2021-06-21 17:20:07] production.INFO: Domain event LogFileSelected runned at 2021-06-21 17:20:07.756141  
-[2021-06-21 17:20:07] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
-[2021-06-21 17:20:07] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-21 17:20:07.764214  
-[2021-06-21 17:20:07] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
-[2021-06-21 17:20:07] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-21 17:20:07.769039  
+[2021-06-24 21:18:35] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:18:35.534849  
+[2021-06-24 21:18:35] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:18:35] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:18:35.542451  
+[2021-06-24 21:18:35] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:18:35] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:18:35.545822  
+[2021-06-24 21:18:35] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:20:16] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:20:16.234598  
+[2021-06-24 21:20:16] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:20:16] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:20:16.242642  
+[2021-06-24 21:20:16] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:20:16] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:20:16.246131  
+[2021-06-24 21:20:16] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:20:33] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:20:33.761382  
+[2021-06-24 21:20:33] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:20:33] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:20:33.769838  
+[2021-06-24 21:20:33] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:20:58] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:20:58.372848  
+[2021-06-24 21:20:58] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:20:58] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:20:58.379848  
+[2021-06-24 21:20:58] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:20:58] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:20:58.383113  
+[2021-06-24 21:20:58] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:21:26] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:21:26.522175  
+[2021-06-24 21:21:26] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:21:26] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:21:26.530488  
+[2021-06-24 21:21:26] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:22:53] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:22:53.756014  
+[2021-06-24 21:22:53] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:22:53] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:22:53.763055  
+[2021-06-24 21:22:53] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:22:53] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:22:53.766287  
+[2021-06-24 21:22:53] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:23:29] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:23:29.970771  
+[2021-06-24 21:23:29] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:23:29] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:23:29.978782  
+[2021-06-24 21:23:29] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:23:50] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:23:50.777304  
+[2021-06-24 21:23:50] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:23:50] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:23:50.785433  
+[2021-06-24 21:23:50] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:24:07] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:24:07.106811  
+[2021-06-24 21:24:07] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:24:07] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:24:07.114319  
+[2021-06-24 21:24:07] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:24:07] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:24:07.118070  
+[2021-06-24 21:24:07] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:24:35] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:24:35.468611  
+[2021-06-24 21:24:35] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:24:35] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:24:35.476590  
+[2021-06-24 21:24:35] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:24:35] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:24:35.479796  
+[2021-06-24 21:24:35] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:24:53] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:24:53.570563  
+[2021-06-24 21:24:53] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:24:53] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:24:53.577863  
+[2021-06-24 21:24:53] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:24:53] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:24:53.581292  
+[2021-06-24 21:24:53] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:25:44] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:25:44.415736  
+[2021-06-24 21:25:44] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:25:44] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:25:44.423563  
+[2021-06-24 21:25:44] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForPlayersKilledEventHandler  
+[2021-06-24 21:25:44] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:25:44.426833  
+[2021-06-24 21:25:44] production.INFO: Domains\Context\MatchReporting\Application\EventHandlers\PlayersKilled\PlayersKilledEventHandler  
+[2021-06-24 21:26:47] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-24 21:26:47.639729  
+[2021-06-24 21:26:47] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:26:47.743259  
+[2021-06-24 21:26:47] production.INFO: Domain event LogFileRejected runned at 2021-06-24 21:26:47.781207  
+[2021-06-24 21:26:47] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
+[2021-06-24 21:26:47] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:26:47.886749  
+[2021-06-24 21:26:56] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-24 21:26:56.957750  
+[2021-06-24 21:26:57] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:26:57.022434  
+[2021-06-24 21:26:57] production.INFO: Domain event LogFileRejected runned at 2021-06-24 21:26:57.045385  
+[2021-06-24 21:26:57] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
+[2021-06-24 21:26:57] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:26:57.091376  
+[2021-06-24 21:26:57] production.INFO: Domain event DeathCausesFailed runned at 2021-06-24 21:26:57.177006  
+[2021-06-24 21:26:57] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-24 21:26:57.195561  
+[2021-06-24 21:26:57] production.INFO: Domain event PlayersKilledFailed runned at 2021-06-24 21:26:57.334059  
+[2021-06-24 21:26:57] production.INFO: Domain event PlayersKilledWereFound runned at 2021-06-24 21:26:57.352173  
+[2021-06-24 21:26:57] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:26:57.393449  
+[2021-06-24 21:26:57] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:26:57] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:26:57.399306  
+[2021-06-24 21:26:57] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
+[2021-06-24 21:26:57] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-24 21:26:57.401248  
+[2021-06-24 21:26:57] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:26:57.417683  
+[2021-06-24 21:26:57] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\LogFile\LogFileSelectedEventHandler  
+[2021-06-24 21:26:57] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:26:57.423311  
+[2021-06-24 21:26:57] production.INFO: Domains\Context\LogHandler\Application\EventHandlers\HumanLogFile\HumanLogFileCreatedForDeathCausesEventHandler  
+[2021-06-24 21:26:57] production.INFO: Domain event DeathCausesWereFound runned at 2021-06-24 21:26:57.427295  
+[2021-06-24 21:27:00] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-24 21:27:00.132120  
+[2021-06-24 21:27:00] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:27:00.248418  
+[2021-06-24 21:27:00] production.INFO: Domain event LogFileRejected runned at 2021-06-24 21:27:00.289413  
+[2021-06-24 21:27:00] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
+[2021-06-24 21:27:00] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:27:00.396296  
+[2021-06-24 21:27:04] production.INFO: Domain event HumanLogFileRejected runned at 2021-06-24 21:27:04.358635  
+[2021-06-24 21:27:04] production.INFO: Domain event HumanLogFileCreated runned at 2021-06-24 21:27:04.465492  
+[2021-06-24 21:27:04] production.INFO: Domain event LogFileRejected runned at 2021-06-24 21:27:04.505485  
+[2021-06-24 21:27:04] production.ERROR: stat(): stat failed for /var/www/framework/storage/app/public/invalid_filename.log  
+[2021-06-24 21:27:04] production.INFO: Domain event LogFileSelected runned at 2021-06-24 21:27:04.610666  

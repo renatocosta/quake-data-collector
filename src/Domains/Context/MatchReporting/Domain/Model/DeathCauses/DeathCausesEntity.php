@@ -12,11 +12,6 @@ final class DeathCausesEntity extends AggregateRoot implements DeathCauses
 
     private array $causes = [];
 
-    public function __construct(DomainEventBus $domainEventBus)
-    {
-        parent::__construct($domainEventBus);
-    }
-
     public function find(): void
     {
         arsort($this->causes);

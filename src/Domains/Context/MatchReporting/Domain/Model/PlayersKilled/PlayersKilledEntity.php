@@ -2,6 +2,7 @@
 
 namespace Domains\Context\MatchReporting\Domain\Model\PlayersKilled;
 
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\State\Player;
 use Domains\CrossCutting\Domain\Application\Event\Bus\DomainEventBus;
 use Domains\CrossCutting\Domain\Model\ValueObjects\AggregateRoot;
 
@@ -12,24 +13,20 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
 
     private int $totalKills = 0;
 
-    private array $matches = [];
+    private Player $player;
 
     private array $players = [];
 
-    private int $defaultTotalKillForMatch = 1;
-
-    public function __construct(DomainEventBus $domainEventBus)
+    public function __construct(DomainEventBus $domainEventBus, Player $player)
     {
         parent::__construct($domainEventBus);
+        $this->player = $player;
     }
 
     public function find(): void
     {
 
-        $this->computeKillsForOnlyAcceptedPlayers();
-        $this->consolidate();
-
-        if (count($this->players) > 0 && $this->isValid()) {
+        if (count($this->player->getPlayers()) > 0 && $this->isValid()) {
             $this->raise(new PlayersKilledWereFound($this));
         } else {
             $this->raise(new PlayersKilledFailed($this));
@@ -44,43 +41,23 @@ final class PlayersKilledEntity extends AggregateRoot implements PlayersKilled
             return;
         }
 
-        $killer = $match->getPlayerWhoKilled();
+        $matchData = ['who_killed' => $match->getPlayerWhoKilled(), 'who_died' => $match->getPlayerWhoDied()];
 
-        $defaultMatch = ['who_killed' => $killer, 'who_died' => $match->getPlayerWhoDied(), 'kills' => $this->defaultTotalKillForMatch];
-        $this->matches[] = $defaultMatch;
-
-        if (!$this->isKillerFound($killer)) {
-            $this->players[$killer] = $defaultMatch;
-            return;
+        if (!$this->isEligibleToBeAPlayer($matchData['who_killed'])) {
+            $this->player->killDown($matchData);
         }
 
-        $this->players[$killer]['kills']++;
-    }
-
-    public function computeKillsForOnlyAcceptedPlayers(): void
-    {
-        foreach ($this->matches as $match) {
-
-            if (!$this->isEligibleToBeAPlayer($match['who_killed']) && $this->isKillerFound($match['who_died'])) {
-                $this->players[$match['who_died']]['kills']--;
-            }
-        }
+        $this->player->killUp($matchData);
     }
 
     public function consolidate(): void
     {
+        $this->players = $this->player->getPlayers();
         $this->totalKills = array_sum(array_column($this->players, 'kills'));
         if (array_key_exists('world', $this->players)) {
             unset($this->players['world']);
         }
-        $this->players = array_map(function ($player) {
-            return $player['kills'];
-        }, $this->players);
-    }
-
-    public function isKillerFound(string $killer): bool
-    {
-        return isset($this->players[$killer]);
+        array_multisort(array_column($this->players, 'kills'), SORT_DESC, $this->players);
     }
 
     public function isEligibleToBeAPlayer(string $killer): bool

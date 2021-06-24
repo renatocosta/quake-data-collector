@@ -18,11 +18,6 @@ final class HumanLogFileEntity extends AggregateRoot implements HumanLogFile
 
     private bool $errorInRows = false;
 
-    public function __construct(DomainEventBus $domainEventBus)
-    {
-        parent::__construct($domainEventBus);
-    }
-
     public function addRow(HumanLogFileRow $row): void
     {
         $row->validation();

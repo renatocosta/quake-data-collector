@@ -22,6 +22,9 @@ use Domains\Context\MatchReporting\Domain\Model\DeathCauses\DeathCauses;
 use Domains\Context\MatchReporting\Domain\Model\DeathCauses\DeathCausesEntity;
 use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\PlayersKilled;
 use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\PlayersKilledEntity;
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\State\BasicPlayer;
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\State\DeadPlayer;
+use Domains\Context\MatchReporting\Domain\Model\PlayersKilled\State\KilledPlayer;
 
 abstract class QuakeDataCollectorFactory
 {
@@ -93,7 +96,8 @@ abstract class QuakeDataCollectorFactory
     //Set up to Players Killed Use Case
     protected function addPlayersKilled(): void
     {
-        $this->playersKilled = new PlayersKilledEntity($this->domainEventBus);
+        $basicPlayer = new BasicPlayer(new KilledPlayer(), new DeadPlayer());
+        $this->playersKilled = new PlayersKilledEntity($this->domainEventBus, $basicPlayer);
     }
 
     public function getPlayersKilled(): PlayersKilled
