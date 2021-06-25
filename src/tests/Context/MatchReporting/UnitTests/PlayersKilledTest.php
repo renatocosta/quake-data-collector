@@ -57,6 +57,55 @@ class PlayersKilledTest extends TestCase
         $this->assertFalse($playersKilled->isValid());
     }
 
+    public function testShouldReturnEmptyPlayersListAtTheBeginning()
+    {
+        $basicPlayer = new BasicPlayer(new KilledPlayer(), new DeadPlayer());
+        $this->assertCount(0, $basicPlayer->getPlayers());
+    }
+
+    public function testShouldReturnExpectCountKillsAtTheBeginning()
+    {
+        $killedPlayer = \Mockery::spy(new KilledPlayer());
+        $basicPlayer = new BasicPlayer($killedPlayer, new DeadPlayer());
+        $match = new Matcher('fulano', 'ciclano');
+        $basicPlayer->killUp($match);
+        $killedPlayer->shouldHaveReceived('computeKills')->once();
+
+        $this->assertSame(1, $basicPlayer->getPlayers()['fulano']['kills']);
+    }
+
+    public function testShouldReturnExpectCountKillsAfterDeath()
+    {
+        $killedPlayer = \Mockery::spy(new KilledPlayer());
+        $deadPlayer = \Mockery::spy(new DeadPlayer());
+
+        $basicPlayer = new BasicPlayer($killedPlayer, $deadPlayer);
+        $match = new Matcher('fulano', 'ciclano');
+        $basicPlayer->killUp($match);
+
+        $match = new Matcher('ciclano', 'fulano');
+        $basicPlayer->killDown($match);
+
+        $killedPlayer->shouldHaveReceived('computeKills')->once();
+        $deadPlayer->shouldHaveReceived('computeKills')->once();
+
+        $this->assertSame(0, $basicPlayer->getPlayers()['fulano']['kills']);
+    }
+
+    public function testShouldReturnExpectCountKillsAtTheEnd()
+    {
+        $killedPlayer = \Mockery::spy(new KilledPlayer());
+        $basicPlayer = new BasicPlayer($killedPlayer, new DeadPlayer());
+        $match = new Matcher('fulano', 'ciclano');
+        $basicPlayer->killUp($match);
+
+        $match = new Matcher('ciclano', 'fulano');
+        $basicPlayer->killUp($match);
+        $killedPlayer->shouldHaveReceived('computeKills')->twice();
+
+        $this->assertCount(2, $basicPlayer->getPlayers());
+    }
+
     public function testShouldBeAbleToFindPlayersKilledSuccessfully()
     {
         $basicPlayer = new BasicPlayer(new KilledPlayer(), new DeadPlayer());
