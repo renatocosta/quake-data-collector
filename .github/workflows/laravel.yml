@@ -25,5 +25,5 @@ jobs:
         working-directory: ./src/framework
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        working-directory: ./src/framework
-        run: ./vendor/bin/phpunit
+        working-directory: ./src
+        run: framework/vendor/bin/phpunit
