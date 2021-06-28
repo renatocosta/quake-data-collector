@@ -1,0 +1,33 @@
+name: Learning pipeline
+on: 
+ workflow_dispatch:
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world!
+  
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: 
+      name: dev
+      url: 'renatocosta.com'
+    needs: build
+        steps:
+      - name: Run a one-line script
+        run: echo Deploy Dev!
+        
+  deploy-qa:
+    runs-on: ubuntu-latest
+    environment: 
+      name: qa
+      url: 'renatocosta.com'
+    needs: deploy-dev
+        steps:
+      - name: Run a one-line script
+        run: echo Deploy QA!        
+    
+        
+      
